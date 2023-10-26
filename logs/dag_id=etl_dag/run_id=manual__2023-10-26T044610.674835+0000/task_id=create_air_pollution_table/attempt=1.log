@@ -1,0 +1,13 @@
+[2023-10-26T04:51:13.470+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_dag.create_air_pollution_table manual__2023-10-26T04:46:10.674835+00:00 [queued]>
+[2023-10-26T04:51:13.500+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_dag.create_air_pollution_table manual__2023-10-26T04:46:10.674835+00:00 [queued]>
+[2023-10-26T04:51:13.502+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 3
+[2023-10-26T04:51:13.543+0000] {taskinstance.py:1380} INFO - Executing <Task(PostgresOperator): create_air_pollution_table> on 2023-10-26 04:46:10.674835+00:00
+[2023-10-26T04:51:13.562+0000] {standard_task_runner.py:57} INFO - Started process 1755 to run task
+[2023-10-26T04:51:13.586+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'etl_dag', 'create_air_pollution_table', 'manual__2023-10-26T04:46:10.674835+00:00', '--job-id', '246', '--raw', '--subdir', 'DAGS_FOLDER/tugaskel8_dag.py', '--cfg-path', '/tmp/tmpf7nvu0d2']
+[2023-10-26T04:51:13.621+0000] {standard_task_runner.py:85} INFO - Job 246: Subtask create_air_pollution_table
+[2023-10-26T04:51:13.754+0000] {task_command.py:415} INFO - Running <TaskInstance: etl_dag.create_air_pollution_table manual__2023-10-26T04:46:10.674835+00:00 [running]> on host d73c1ff20372
+[2023-10-26T04:51:25.544+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 246 for task create_air_pollution_table ((psycopg2.OperationalError) could not translate host name "postgres" to address: Temporary failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8); 1755)
+[2023-10-26T04:51:25.867+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-10-26T04:51:26.084+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

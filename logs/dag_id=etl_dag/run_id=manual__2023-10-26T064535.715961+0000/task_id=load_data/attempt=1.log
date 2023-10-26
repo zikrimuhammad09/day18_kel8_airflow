@@ -1,0 +1,92 @@
+[2023-10-26T06:45:47.191+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_dag.load_data manual__2023-10-26T06:45:35.715961+00:00 [queued]>
+[2023-10-26T06:45:47.206+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_dag.load_data manual__2023-10-26T06:45:35.715961+00:00 [queued]>
+[2023-10-26T06:45:47.207+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 3
+[2023-10-26T06:45:47.235+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): load_data> on 2023-10-26 06:45:35.715961+00:00
+[2023-10-26T06:45:47.250+0000] {standard_task_runner.py:57} INFO - Started process 2817 to run task
+[2023-10-26T06:45:47.254+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'etl_dag', 'load_data', 'manual__2023-10-26T06:45:35.715961+00:00', '--job-id', '404', '--raw', '--subdir', 'DAGS_FOLDER/tugaskel8_dag.py', '--cfg-path', '/tmp/tmphsz75n2b']
+[2023-10-26T06:45:47.257+0000] {standard_task_runner.py:85} INFO - Job 404: Subtask load_data
+[2023-10-26T06:45:47.324+0000] {task_command.py:415} INFO - Running <TaskInstance: etl_dag.load_data manual__2023-10-26T06:45:35.715961+00:00 [running]> on host d73c1ff20372
+[2023-10-26T06:45:47.645+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='kel8' AIRFLOW_CTX_DAG_ID='etl_dag' AIRFLOW_CTX_TASK_ID='load_data' AIRFLOW_CTX_EXECUTION_DATE='2023-10-26T06:45:35.715961+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-10-26T06:45:35.715961+00:00'
+[2023-10-26T06:45:47.774+0000] {base.py:73} INFO - Using connection ID 'db_polusiudara' for task execution.
+[2023-10-26T06:45:50.644+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1810, in _execute_context
+    context = constructor(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 1121, in _init_compiled
+    param = {
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 1122, in <dictcomp>
+    key: processors[key](compiled_params[key])
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 2669, in process
+    serialized = json_serializer(value)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type ndarray is not JSON serializable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tugaskel8_dag.py", line 60, in load_data
+    final_df.to_sql('hands_on_final',hook.get_sqlalchemy_engine(),if_exists='append',index=False,dtype={"parameters": sqlalchemy.types.JSON,"coordinates" :sqlalchemy.types.JSON,"bounds" : sqlalchemy.types.JSON,"manufacturers":sqlalchemy.types.JSON  })
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1920, in to_sql
+    total_inserted = sql_engine.insert_records(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1470, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1461, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1023, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 929, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1816, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1810, in _execute_context
+    context = constructor(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 1121, in _init_compiled
+    param = {
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 1122, in <dictcomp>
+    key: processors[key](compiled_params[key])
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 2669, in process
+    serialized = json_serializer(value)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+sqlalchemy.exc.StatementError: (builtins.TypeError) Object of type ndarray is not JSON serializable
+[SQL: INSERT INTO hands_on_final (id, city, name, entity, country, sources, "isMobile", "isAnalysis", parameters, "sensorType", coordinates, "lastUpdated", "firstUpdated", measurements, bounds, manufacturers) VALUES (%(id)s, %(city)s, %(name)s, %(entity)s, %(country)s, %(sources)s, %(isMobile)s, %(isAnalysis)s, %(parameters)s, %(sensorType)s, %(coordinates)s, %(lastUpdated)s, %(firstUpdated)s, %(measurements)s, %(bounds)s, %(manufacturers)s)]
+[parameters: [{'id': 2538, 'city': None, 'name': 'US Diplomatic Post: Jakarta Central', 'entity': None, 'country': 'ID', 'sources': None, 'isMobile': False, 'isAna ... (585 characters truncated) ... 182382]), 'manufacturers': array([{'manufacturerName': 'Unknown Governmental Organization', 'modelName': 'Government Monitor'}],
+      dtype=object)}]]
+[2023-10-26T06:45:50.692+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=etl_dag, task_id=load_data, execution_date=20231026T064535, start_date=20231026T064547, end_date=20231026T064550
+[2023-10-26T06:45:50.716+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 404 for task load_data ((builtins.TypeError) Object of type ndarray is not JSON serializable
+[SQL: INSERT INTO hands_on_final (id, city, name, entity, country, sources, "isMobile", "isAnalysis", parameters, "sensorType", coordinates, "lastUpdated", "firstUpdated", measurements, bounds, manufacturers) VALUES (%(id)s, %(city)s, %(name)s, %(entity)s, %(country)s, %(sources)s, %(isMobile)s, %(isAnalysis)s, %(parameters)s, %(sensorType)s, %(coordinates)s, %(lastUpdated)s, %(firstUpdated)s, %(measurements)s, %(bounds)s, %(manufacturers)s)]
+[parameters: [{'id': 2538, 'city': None, 'name': 'US Diplomatic Post: Jakarta Central', 'entity': None, 'country': 'ID', 'sources': None, 'isMobile': False, 'isAna ... (585 characters truncated) ... 182382]), 'manufacturers': array([{'manufacturerName': 'Unknown Governmental Organization', 'modelName': 'Government Monitor'}],
+      dtype=object)}]]; 2817)
+[2023-10-26T06:45:50.766+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-10-26T06:45:50.790+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

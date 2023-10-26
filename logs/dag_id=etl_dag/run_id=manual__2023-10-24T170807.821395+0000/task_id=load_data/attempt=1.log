@@ -1,0 +1,22 @@
+[2023-10-24T17:08:16.206+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_dag.load_data manual__2023-10-24T17:08:07.821395+00:00 [queued]>
+[2023-10-24T17:08:16.233+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_dag.load_data manual__2023-10-24T17:08:07.821395+00:00 [queued]>
+[2023-10-24T17:08:16.234+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 3
+[2023-10-24T17:08:16.268+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): load_data> on 2023-10-24 17:08:07.821395+00:00
+[2023-10-24T17:08:16.299+0000] {standard_task_runner.py:57} INFO - Started process 199 to run task
+[2023-10-24T17:08:16.304+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'etl_dag', 'load_data', 'manual__2023-10-24T17:08:07.821395+00:00', '--job-id', '124', '--raw', '--subdir', 'DAGS_FOLDER/tugaskel8_dag.py', '--cfg-path', '/tmp/tmpkanoy7z2']
+[2023-10-24T17:08:16.310+0000] {standard_task_runner.py:85} INFO - Job 124: Subtask load_data
+[2023-10-24T17:08:16.410+0000] {task_command.py:415} INFO - Running <TaskInstance: etl_dag.load_data manual__2023-10-24T17:08:07.821395+00:00 [running]> on host d73c1ff20372
+[2023-10-24T17:08:16.894+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='kel8' AIRFLOW_CTX_DAG_ID='etl_dag' AIRFLOW_CTX_TASK_ID='load_data' AIRFLOW_CTX_EXECUTION_DATE='2023-10-24T17:08:07.821395+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-10-24T17:08:07.821395+00:00'
+[2023-10-24T17:08:17.027+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tugaskel8_dag.py", line 46, in load_data
+    return final_df.to_sql('public.hands_on_final',hook.sql_alchemy_engine(),if_exists='replace')
+AttributeError: 'PostgresHook' object has no attribute 'sql_alchemy_engine'
+[2023-10-24T17:08:17.050+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=etl_dag, task_id=load_data, execution_date=20231024T170807, start_date=20231024T170816, end_date=20231024T170817
+[2023-10-24T17:08:17.072+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 124 for task load_data ('PostgresHook' object has no attribute 'sql_alchemy_engine'; 199)
+[2023-10-24T17:08:17.123+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-10-24T17:08:17.150+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

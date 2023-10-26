@@ -1,0 +1,39 @@
+[2023-10-26T06:54:43.804+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_dag.load_data manual__2023-10-26T06:54:37.181126+00:00 [queued]>
+[2023-10-26T06:54:43.819+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_dag.load_data manual__2023-10-26T06:54:37.181126+00:00 [queued]>
+[2023-10-26T06:54:43.820+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 3
+[2023-10-26T06:54:43.839+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): load_data> on 2023-10-26 06:54:37.181126+00:00
+[2023-10-26T06:54:43.848+0000] {standard_task_runner.py:57} INFO - Started process 3106 to run task
+[2023-10-26T06:54:43.852+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'etl_dag', 'load_data', 'manual__2023-10-26T06:54:37.181126+00:00', '--job-id', '420', '--raw', '--subdir', 'DAGS_FOLDER/tugaskel8_dag.py', '--cfg-path', '/tmp/tmpifqp_qps']
+[2023-10-26T06:54:43.855+0000] {standard_task_runner.py:85} INFO - Job 420: Subtask load_data
+[2023-10-26T06:54:43.915+0000] {task_command.py:415} INFO - Running <TaskInstance: etl_dag.load_data manual__2023-10-26T06:54:37.181126+00:00 [running]> on host d73c1ff20372
+[2023-10-26T06:54:44.197+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='kel8' AIRFLOW_CTX_DAG_ID='etl_dag' AIRFLOW_CTX_TASK_ID='load_data' AIRFLOW_CTX_EXECUTION_DATE='2023-10-26T06:54:37.181126+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-10-26T06:54:37.181126+00:00'
+[2023-10-26T06:54:44.322+0000] {warnings.py:109} WARNING - /opt/***/dags/tugaskel8_dag.py:51: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  final_df.to_sql('tes_table', con=hook, index=False, if_exists='replace')
+
+[2023-10-26T06:54:44.326+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tugaskel8_dag.py", line 51, in load_data
+    final_df.to_sql('tes_table', con=hook, index=False, if_exists='replace')
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 2378, in to_sql
+    table.create()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 903, in create
+    if self.exists():
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 889, in exists
+    return self.pd_sql.has_table(self.name, self.schema)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 2385, in has_table
+    return len(self.execute(query, [name]).fetchall()) > 0
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 2200, in execute
+    cur = self.con.cursor()
+AttributeError: 'PostgresHook' object has no attribute 'cursor'
+[2023-10-26T06:54:44.346+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=etl_dag, task_id=load_data, execution_date=20231026T065437, start_date=20231026T065443, end_date=20231026T065444
+[2023-10-26T06:54:44.365+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 420 for task load_data ('PostgresHook' object has no attribute 'cursor'; 3106)
+[2023-10-26T06:54:44.389+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-10-26T06:54:44.411+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

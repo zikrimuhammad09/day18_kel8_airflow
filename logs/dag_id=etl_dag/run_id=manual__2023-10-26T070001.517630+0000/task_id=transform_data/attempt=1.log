@@ -1,0 +1,13 @@
+[2023-10-26T07:01:03.197+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_dag.transform_data manual__2023-10-26T07:00:01.517630+00:00 [queued]>
+[2023-10-26T07:01:03.219+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_dag.transform_data manual__2023-10-26T07:00:01.517630+00:00 [queued]>
+[2023-10-26T07:01:03.220+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 3
+[2023-10-26T07:01:03.247+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): transform_data> on 2023-10-26 07:00:01.517630+00:00
+[2023-10-26T07:01:03.258+0000] {standard_task_runner.py:57} INFO - Started process 3344 to run task
+[2023-10-26T07:01:03.261+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'etl_dag', 'transform_data', 'manual__2023-10-26T07:00:01.517630+00:00', '--job-id', '439', '--raw', '--subdir', 'DAGS_FOLDER/tugaskel8_dag.py', '--cfg-path', '/tmp/tmpogxdmld0']
+[2023-10-26T07:01:03.265+0000] {standard_task_runner.py:85} INFO - Job 439: Subtask transform_data
+[2023-10-26T07:01:03.336+0000] {task_command.py:415} INFO - Running <TaskInstance: etl_dag.transform_data manual__2023-10-26T07:00:01.517630+00:00 [running]> on host d73c1ff20372
+[2023-10-26T07:01:22.832+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 439 for task transform_data ((psycopg2.OperationalError) could not translate host name "postgres" to address: Temporary failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8); 3344)
+[2023-10-26T07:01:23.460+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-10-26T07:01:25.653+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

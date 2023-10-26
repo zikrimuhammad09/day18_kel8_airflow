@@ -1,0 +1,22 @@
+[2023-10-24T15:44:11.217+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_dag.transform_data scheduled__2023-10-24T15:43:36.078597+00:00 [queued]>
+[2023-10-24T15:44:11.229+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_dag.transform_data scheduled__2023-10-24T15:43:36.078597+00:00 [queued]>
+[2023-10-24T15:44:11.231+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 3
+[2023-10-24T15:44:11.252+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): transform_data> on 2023-10-24 15:43:36.078597+00:00
+[2023-10-24T15:44:11.266+0000] {standard_task_runner.py:57} INFO - Started process 757 to run task
+[2023-10-24T15:44:11.272+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'etl_dag', 'transform_data', 'scheduled__2023-10-24T15:43:36.078597+00:00', '--job-id', '19', '--raw', '--subdir', 'DAGS_FOLDER/tugaskel8_dag.py', '--cfg-path', '/tmp/tmpfofy1z1n']
+[2023-10-24T15:44:11.276+0000] {standard_task_runner.py:85} INFO - Job 19: Subtask transform_data
+[2023-10-24T15:44:11.346+0000] {task_command.py:415} INFO - Running <TaskInstance: etl_dag.transform_data scheduled__2023-10-24T15:43:36.078597+00:00 [running]> on host 5628b0258ab1
+[2023-10-24T15:44:11.453+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='kel8' AIRFLOW_CTX_DAG_ID='etl_dag' AIRFLOW_CTX_TASK_ID='transform_data' AIRFLOW_CTX_EXECUTION_DATE='2023-10-24T15:43:36.078597+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-10-24T15:43:36.078597+00:00'
+[2023-10-24T15:44:11.478+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tugaskel8_dag.py", line 33, in transform_data
+    tes_data = data['results']
+TypeError: string indices must be integers
+[2023-10-24T15:44:11.503+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=etl_dag, task_id=transform_data, execution_date=20231024T154336, start_date=20231024T154411, end_date=20231024T154411
+[2023-10-24T15:44:11.523+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 19 for task transform_data (string indices must be integers; 757)
+[2023-10-24T15:44:11.568+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-10-24T15:44:11.593+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check
